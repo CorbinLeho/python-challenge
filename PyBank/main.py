@@ -13,14 +13,24 @@ bank_csv = os.path.join(../../../Desktop/Resources/PyBank.csv)
 with open(bank_csv, newline = "") as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=",")
     header = next(csv_reader)
+    TotalMonths = len(csv_reader)
+
+    for months in csv_reader:
+      for month in months:
+          total = 0
+          Total_Profit = sum(month.row(2))
     
 
-    # Loop through looking for the video
-    for row in csv_reader:
-    TotalMonths = len(row)
+# Set variable for output file
+output_file = os.path.join("PyBank.csv")
 
+#  Open the output file
+with open(output_file, "w", newline="") as datafile:
+    writer = csv.writer(datafile)
 
-        if 
+    # Write the header row
+    writer.writerow(["Title", "Course Price", "Subscribers", "Reviews Left",
+                     "Percent of Reviews", "Length of Course"])
 
-
-            break
+    # Write in zipped rows
+    writer.writerows(cleaned_csv)
