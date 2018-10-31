@@ -15,10 +15,20 @@ with open(Bank_csv, newline = "") as csv_file:
 
     header = next(csv_reader)
 
-    TotalMonths = len(list(csv_reader))
+    TotalMonths = 0
     TotalProfit = 0
-    for months in csv_reader:
+    GreatestIncrease = 0
+    GreatestDecrease = 0
+    def AverageChange(MonthlyChange, TotalMonths):
+
+    for row in csv_reader:
+        TotalMonths += 1
         TotalProfit += int(row[1])
+        GreatestIncrease = max(GreatestIncrease, MonthlyChange)
+        GreatestDecrease = min(GreatestDecrease, abs(MonthlyChange))
+        MonthlyChange = int(row + 1 [1]) - int(row[1])
+        if abs(MonthlyChange) > abs(MonthlyChange):
+            GreatestIncrease = 
 
 
     
@@ -34,4 +44,4 @@ with open(output_file, "w", newline="") as datafile:
     writer.writerow(["Date", "Profit/Losses"])
 
     # Write in zipped rows
-    writer.writerows(cleaned_csv)
+  #  writer.writerows()
