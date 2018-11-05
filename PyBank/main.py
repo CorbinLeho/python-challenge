@@ -2,15 +2,11 @@
 import os
 import csv
 
-month = []
-profit = []
-
 # Set path for file
 Bank_csv = ("PyBank.csv")
 
-
 # Open the CSV
-with open(Bank_csv, newline = "") as csv_file:
+with open(Bank_csv) as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=",")
 
     header = next(csv_reader)
@@ -20,15 +16,17 @@ with open(Bank_csv, newline = "") as csv_file:
     MonthlyChange = []
     GreatestIncrease = 0
     GreatestDecrease = 0
+
     for row in csv_reader:
         TotalMonths += 1
-        TotalProfit += float(row[1])
-        MonthlyChange.append(float(row + 1 [1]) - float(row[1]))
-        GreatestIncrease = max(MonthlyChange)
-        GreatestDecrease = min(MonthlyChange)
-        AverageChange = sum(abs(MonthlyChange)) / len(TotalMonths)
-    
-    def Analysis():
+        TotalProfit += int(row[1])
+        MonthlyChange.append(int(row + 1[1]) - int(row[1]))
+
+    GreatestIncrease = max(MonthlyChange)
+    GreatestDecrease = min(MonthlyChange)
+    AverageChange = sum(abs(MonthlyChange)) / TotalMonths
+
+    def Analysis(GreatestIncrease, GreatestDecrease, AverageChange, TotalProfit, TotalMonths)
         print("Financial Analysis")
         print("--------------------------")
         print("Total Months: " + str(TotalMonths))
@@ -36,17 +34,16 @@ with open(Bank_csv, newline = "") as csv_file:
         print("Average Change: $" + str(AverageChange))
         print("Greatest Increase in Profits: " + str(GreatestIncrease))
         print("Greatest Decrease in Profits: " + str(GreatestDecrease))
+
     Analysis()
 
 # Set variable for output file
-output_file = os.path.join("PyBankSolved.csv")
+output_file = os.path.join("PyBankSolved.txt")
 
 #  Open the output file
 with open(output_file, "w", newline="") as datafile:
-    writer = txt.writer(datafile)
+    writer = csv.writer(datafile)
 
     # Write the header row
-    writer.writerow(Analysis())
-
-    # Write in zipped rows
-  #  writer.writerows()
+    writer.writerows(Analysis())
+    writer.close()
