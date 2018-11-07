@@ -7,8 +7,8 @@ Bank_csv = ("PyBank.csv")
 
 # Initiate Variables
 Months = []
-MonthlyChange = []
-
+MonthlyProfits = []
+TotalProfit = 0
 
 # Open the CSV
 with open(Bank_csv) as csv_file:
@@ -18,29 +18,29 @@ with open(Bank_csv) as csv_file:
     # Append lists
     for row in csv_reader:
         Months.append(row[0])
-        MonthlyChange.append(int(row[1]))
+        MonthlyProfits.append(int(row[1]))
 
-GreatestIncrease = MonthlyChange[0]
-GreatestDecrease = MonthlyChange[0]
-TotalProfit = 0
 
-for Change in range(len(MonthlyChange)):
-    if MonthlyChange[Change] >= GreatestIncrease:
-        GreatestIncrease = MonthlyChange[Change]
-        GreatestMonth = Months[Change]
-    elif MonthlyChange[Change] <= GreatestDecrease:
-        GreatestDecrease = MonthlyChange[Change]
-        LeastMonth = Months[Change]
-    TotalProfit += MonthlyChange[Change]
+MonthlyChange = []
+TotalProfit = sum(MonthlyProfits)
+
+for i in range(1,len(MonthlyProfits)):
+    MonthlyChange.append(MonthlyProfits[i] - MonthlyProfits[i-1])
+    AverageChange = sum(MonthlyChange)/len(MonthlyChange)
+    GreatestIncrease = max(MonthlyChange)
+    GreatestDecrease = min(MonthlyChange)
+    GreatestMonth = str(Months[MonthlyChange.index(max(MonthlyChange))])
+    LeastMonth = str(Months[MonthlyChange.index(min(MonthlyChange))])
+
+z = round(AverageChange, 2)
 
 TotalMonths = len(Months)
-AverageChange = round(TotalProfit / TotalMonths, 2)
 
 print("Financial Analysis")
 print("--------------------------")
 print("Total Months: " + str(TotalMonths))
 print("Total: $" + str(TotalProfit))
-print("Average Change: $" + str(AverageChange))
+print("Average Change: $" + str(z))
 print("Greatest Increase in Profits: " + GreatestMonth + " " + str(GreatestIncrease))
 print("Greatest Decrease in Profits: " + LeastMonth + " " + str(GreatestDecrease))
 
@@ -54,6 +54,6 @@ with open(output_file, "w") as f:
     f.writelines("--------------------------" + '\n')
     f.writelines("Total Months: " + str(TotalMonths) + '\n')
     f.writelines("Total: $" + str(TotalProfit) + '\n')
-    f.writelines("Average Change: $" + str(AverageChange) + '\n')
+    f.writelines("Average Change: $" + str(z) + '\n')
     f.writelines("Greatest Increase in Profits: " + GreatestMonth + " $" + str(GreatestIncrease) + '\n')
     f.writelines("Greatest Decrease in Profits: " + LeastMonth + " $" + str(GreatestDecrease) + '\n')
